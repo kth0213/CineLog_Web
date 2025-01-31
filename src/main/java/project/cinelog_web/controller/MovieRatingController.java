@@ -12,4 +12,5 @@ public class MovieRatingController {
     private final MovieRatingService movieRatingService;
 
 
+
 }
