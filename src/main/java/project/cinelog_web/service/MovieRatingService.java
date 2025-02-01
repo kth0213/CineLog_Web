@@ -27,4 +27,8 @@ public class MovieRatingService {
         this.movieRatingRepository.save(m);
     }
 
+    public void delete(MovieRating movieRating) {
+        this.movieRatingRepository.delete(movieRating);
+    }
+
 }
