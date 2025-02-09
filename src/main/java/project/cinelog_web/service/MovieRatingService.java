@@ -18,7 +18,7 @@ public class MovieRatingService {
         this.movieRatingRepository = movieRatingRepository;
     }
 
-    public void create(Movie movie, int rating, User user, String comment) {
+    public MovieRating create(Movie movie, int rating, User user, String comment) {
         MovieRating m = new MovieRating();
         m.setMovie(movie);
         m.setRating(rating);
@@ -26,7 +26,7 @@ public class MovieRatingService {
         m.setComment(comment);
         m.setCreateAt(LocalDate.now());
         m.setUpdateAt(LocalDate.now());
-        this.movieRatingRepository.save(m);
+        return movieRatingRepository.save(m);
     }
 
     public List<MovieRating> getRatingByMovie(Long movieId) {

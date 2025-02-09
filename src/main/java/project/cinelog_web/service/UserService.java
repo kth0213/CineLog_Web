@@ -19,4 +19,9 @@ public class UserService {
         user.setPassword(password);
         this.userRepository.save(user);
     }
+
+    public User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
 }
