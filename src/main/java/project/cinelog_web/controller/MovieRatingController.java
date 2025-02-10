@@ -4,15 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import project.cinelog_web.model.Movie;
 import project.cinelog_web.model.MovieRating;
 import project.cinelog_web.model.User;
 import project.cinelog_web.service.MovieRatingService;
 import project.cinelog_web.service.MovieService;
 import project.cinelog_web.service.UserService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -33,6 +33,33 @@ public class MovieRatingController {
 
         MovieRating movieRating = movieRatingService.create(movie, rating, user, comment);
         return ResponseEntity.ok(movieRating);
+    }
+
+    @GetMapping("/{movieId}")
+    public ResponseEntity<List<MovieRating>> getRatingsByMovie(@PathVariable Long movieId) {
+        List<MovieRating> ratings = movieRatingService.getRatingByMovie(movieId);
+        return ResponseEntity.ok(ratings);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<MovieRating>> getRatingsByUser(@PathVariable Long userId) {
+        List<MovieRating> ratings = movieRatingService.getRatingByUser(userId);
+        return ResponseEntity.ok(ratings);
+    }
+
+    @PutMapping("/{ratingId}")
+    public ResponseEntity<MovieRating> updateRating(@PathVariable Long ratingId,
+                                                    @RequestParam int newRating,
+                                                    @RequestParam(required = false) String newComment) {
+
+        MovieRating updateRating = movieRatingService.updateRating(ratingId, newRating, newComment);
+        return ResponseEntity.ok(updateRating);
+    }
+
+    @DeleteMapping("/{ratingId}")
+    public ResponseEntity<Void> deleteRating(@PathVariable Long ratingId) {
+        movieRatingService.delete(ratingId);
+        return ResponseEntity.noContent().build();
     }
 
 }
