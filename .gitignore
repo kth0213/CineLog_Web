@@ -37,3 +37,14 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Java / Spring Boot
+/target/
+/*.jar
+/*.war
+/*.class
+
+# Database Credentials
+/src/main/resources/application.properties
+/src/main/resources/application.yml
+/src/main/resources/.env
